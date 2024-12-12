@@ -3,20 +3,20 @@ const app = express();
 const cors = require("cors");
 
 const mongoose = require("mongoose");
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5001;
 require('dotenv').config()
 
 // middleware
 app.use(express.json());
 app.use(cors({
-    origin: ['http://localhost:5173', 'https://book-app-frontend-tau.vercel.app'],
-    credentials: true
+  origin: ['http://localhost:5173', process.env.VITE_URL],
+  credentials: true
 }))
 
 // routes
 const bookRoutes = require('./src/books/book.route');
 const orderRoutes = require("./src/orders/order.route")
-const userRoutes =  require("./src/users/user.route")
+const userRoutes = require("./src/users/user.route")
 const adminRoutes = require("./src/stats/admin.stats")
 
 app.use("/api/books", bookRoutes)
